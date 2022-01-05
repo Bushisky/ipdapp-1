@@ -179,10 +179,11 @@ public class AdmissionFormPageController {
             Location location = Context.getService(KenyaEmrService.class).getDefaultLocation();
             encounter.setPatient(admission.getPatient());
             encounter.setCreator(user);
+            Provider prov = new Provider();
             encounter.setEncounterDatetime(date);
             encounter.setEncounterType(encounterType);
             encounter.setLocation(location);
-            encounter.setProvider(getEncounterRole(), getProvider(user));
+            prov.setName(String.valueOf(user));
             encounter = Context.getEncounterService().saveEncounter(encounter);
             //done save ipd encounter
             patientAdmissionLog.setIpdEncounter(encounter);
@@ -211,8 +212,8 @@ public class AdmissionFormPageController {
                 BillableService service;
 
                 ArrayList<Concept> al=new ArrayList<Concept>();
-                Concept concept1=Context.getConceptService().getConcept("ADMISSION FEE");
-                Concept concept2=Context.getConceptService().getConcept("CATERING FEE");
+                Concept concept1=Context.getConceptService().getConceptByUuid("404b4f27-641f-4889-ae91-66fa2165db0c");
+                Concept concept2=Context.getConceptService().getConceptByUuid("06fca151-2945-49a5-9ba3-032dc2f947e1");
                 al.add(concept1);
                 al.add(concept2);
 
